@@ -31,7 +31,12 @@ model_params = {
     "N": 10000,
     "height": 100,
     "width": 100,
-    "Initial_Outbreak": UserSettableParameter("slider", "Initial Outbreak", 0.1, 0.01, 1.0, 0.01)
-    # "Transmission Rate": UserSettableParameter("slider", "Transmission Rate", 0.1, 0.01, 1.0, 0.01)
+    "Initial_Outbreak": UserSettableParameter("slider", "Initial Outbreak (%)", 0.1, 0.01, 1.0, 0.01),
+    "TR": UserSettableParameter("slider", "Transmission Rate (%)", 0.5, 0.1, 1.0, 0.01),
+    "RT": UserSettableParameter("slider", "Recovery Time (days)", 22, 14, 28),
+    "MR": UserSettableParameter("slider", "Mortality Rate (%)", 0.02, 0.01, 0.05, 0.001),
+    "Policy": UserSettableParameter("slider", "Social Distancing (%)", 0.0, 0.0, 1.0, 0.05)
+
+
 }
 server = ModularServer(SocialDistancing_Model, [canvas_element, tree_chart], "Covd-19 Spread", model_params)

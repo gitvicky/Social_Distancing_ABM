@@ -14,13 +14,22 @@ class SocialDistancing_Model(Model):
     A certain portion of the infected individuals die and are chosen randomly baseed on the Mortatlity Rate.
     Movement of individuals can be employed to indicate social distancing measures. 
     """
-    def __init__(self, N, width, height, Initial_Outbreak):
+    def __init__(self, N, width, height, Initial_Outbreak, TR, RT, MR, Policy):
         self.num_agents = N
         self.grid = MultiGrid(width, height, False)
         self.Init_OB = Initial_Outbreak
         # self.TR = Transmission_Rate
         self.schedule = RandomActivation(self)
         self.running = True 
+
+
+        multiplier = 5
+        self.Transmission = TR #Transmission Rate 
+        self.IP = 0  * multiplier #Incubation Period
+        self.Recovery = RT * multiplier  #Recovery Time 
+        self.Mortality = MR
+
+        self.policy = Policy # Percentage Immobile
 
 
                 # Create agents
@@ -50,7 +59,6 @@ class SocialDistancing_Model(Model):
     def step(self):
         self.datacollector.collect(self) #Ensuring the data is stored from all agents for all models. 
         self.schedule.step()
-        print(self.schedule.time)
         
         if self.schedule.time == 100:
             self.running = False
