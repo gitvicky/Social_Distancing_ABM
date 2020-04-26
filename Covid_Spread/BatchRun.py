@@ -9,19 +9,19 @@ from model import SocialDistancing_Model
 from mesa.batchrunner import BatchRunner
 
 # %%
-model = SocialDistancing_Model(N=10000,
-                               width = 100,
-                                height=100,
-                                Initial_Outbreak=0.2)
+# model = SocialDistancing_Model(N=10000,
+#                                width = 100,
+#                                 height=100,
+#                                 Initial_Outbreak=0.2)
 
-model = SocialDistancing_Model(50, 10, 10, 0.1)
-for i in range(20):
-    model.step()
+# model = SocialDistancing_Model(50, 10, 10, 0.1)
+# for i in range(20):
+#     model.step()
 # %%
-model.run_model()
+# model.run_model()
 
 # %%
-results =model.datacollector.get_model_vars_dataframe()    
+# results =model.datacollector.get_model_vars_dataframe()    
 
 
 # %%
@@ -29,7 +29,11 @@ fixed_params = {
     "N": 10000,
     "width": 100,
     "height": 100,
-    'Initial_Outbreak': 0.2
+    'Initial_Outbreak': 0.1,
+    'TR': 0.5,
+    'RT': 28,
+    'MR': 0.02,
+    'Policy': 0.0
 }
 variable_params = None
 
@@ -39,7 +43,7 @@ batch_run = BatchRunner(
      SocialDistancing_Model,
      variable_params,
      fixed_params,
-     iterations=10,
+     iterations=20,
      max_steps=100,
     model_reporters={"Data Collector": lambda m: m.datacollector})
 

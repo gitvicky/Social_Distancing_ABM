@@ -23,10 +23,9 @@ class SocialDistancing_Model(Model):
         self.running = True 
 
 
-        multiplier = 5
         self.Transmission = TR #Transmission Rate 
-        self.IP = 0  * multiplier #Incubation Period
-        self.Recovery = RT * multiplier  #Recovery Time 
+        self.IP = 0   #Incubation Period
+        self.Recovery = RT  #Recovery Time 
         self.Mortality = MR
 
         self.policy = Policy # Percentage Immobile
@@ -50,7 +49,11 @@ class SocialDistancing_Model(Model):
                             'Total': lambda m: m.schedule.get_agent_count(),
                             'Healthy': lambda m: self.count_type(m, 'Healthy'),
                             'Sick': lambda m: self.count_type(m, 'Sick'),
-                            'Immune': lambda m: self.count_type(m, 'Immune')
+                            'Immune': lambda m: self.count_type(m, 'Immune'),
+                            'Transmission Rate': self.Transmission,
+                            'Recovery Time': self.Recovery,
+                            'Mortality Rate': self.Mortality,
+                            'Social Distancing Policy': self.policy
                             }
 
         self.datacollector = DataCollector(model_reporters=model_reporters)
