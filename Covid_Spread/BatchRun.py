@@ -162,26 +162,34 @@ run_data_90 = batch_run_90.get_model_vars_dataframe()
 
 # %%
 import pandas as pd
-br_step_data = pd.DataFrame()
-for i in range(len(run_data_90)):
-    i_run_data = run_data_90["Data Collector"][i].get_model_vars_dataframe()
-    br_step_data = br_step_data.append(i_run_data, ignore_index=True)
+def create_df(run_data, pol_val):
 
-br_step_data['N'] = pd.Series(np.ones(2000)*fixed_params['N'])
-br_step_data['Initial_Outbreak'] = pd.Series(np.ones(2000)*fixed_params['Initial_Outbreak'])
-br_step_data['TRansmission_Rate'] = pd.Series(np.ones(2000)*fixed_params['TR'])
-br_step_data['Recovery_Time'] = pd.Series(np.ones(2000)*fixed_params['RT'])
-br_step_data['Mortality_Rate'] = pd.Series(np.ones(2000)*fixed_params['MR'])
-br_step_data['Policy'] = pd.Series(np.ones(2000)*0.90)
-br_step_data['Exp_#'] =  pd.Series(np.ones(2000))
+    br_step_data = pd.DataFrame()
+    for i in range(len(run_data)):
+        i_run_data = run_data["Data Collector"][i].get_model_vars_dataframe()
+        br_step_data = br_step_data.append(i_run_data, ignore_index=True)
 
+    br_step_data['N'] = pd.Series(np.ones(2000)*fixed_params['N'])
+    br_step_data['Initial_Outbreak'] = pd.Series(np.ones(2000)*fixed_params['Initial_Outbreak'])
+    br_step_data['TRansmission_Rate'] = pd.Series(np.ones(2000)*fixed_params['TR'])
+    br_step_data['Recovery_Time'] = pd.Series(np.ones(2000)*fixed_params['RT'])
+    br_step_data['Mortality_Rate'] = pd.Series(np.ones(2000)*fixed_params['MR'])
+    br_step_data['Policy'] = pd.Series(np.ones(2000)*pol_val)
+    br_step_data['Exp_#'] =  pd.Series(np.ones(2000))
+    br_step_data['Time'] = pd.Series(np.ones(2000))
 
-for ii in range(len(br_step_data)):
-    br_step_data['Time'][ii] = ii%100
-    br_step_data['Exp_#'][ii] = ii//100 + 1 
+    for ii in range(len(br_step_data)):
+        br_step_data['Time'][ii] = ii%100
+        br_step_data['Exp_#'][ii] = ii//100 + 1 
 
-Policy_90 = br_step_data
+    return br_step_data
 
+# %%
+Policy_0 = create_df(run_data_0, 0.0)
+Policy_25 = create_df(run_data_25, 0.25)
+Policy_50 = create_df(run_data_50, 0.50)
+Policy_75 = create_df(run_data_75, 0.75)
+Policy_90 = create_df(run_data_90, 0.90)
 
 # %%
 
