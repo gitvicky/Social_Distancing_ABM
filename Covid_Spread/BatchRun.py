@@ -177,6 +177,7 @@ br_step_data['Exp_#'] =  pd.Series(np.ones(2000))
 
 
 for ii in range(len(br_step_data)):
+    br_step_data['Time'][ii] = ii%100
     br_step_data['Exp_#'][ii] = ii//100 + 1 
 
 Policy_90 = br_step_data
@@ -191,3 +192,42 @@ Policy_75.to_csv('/Users/Vicky/Desktop/Code/Agent_Based_Modelling/Social_Distanc
 Policy_90.to_csv('/Users/Vicky/Desktop/Code/Agent_Based_Modelling/Social_Distancing/Social_Distancing_ABM/Run_Data/Policy_90.csv')
 
 # %%
+
+import numpy as np
+import pandas as pd 
+
+Policy_0 = pd.read_csv('/Users/vgopakum/Desktop/Github/Social_Distancing_ABM/Run_Data/Policy_0.csv')
+Policy_25 = pd.read_csv('/Users/vgopakum/Desktop/Github/Social_Distancing_ABM/Run_Data/Policy_25.csv')
+Policy_50 = pd.read_csv('/Users/vgopakum/Desktop/Github/Social_Distancing_ABM/Run_Data/Policy_50.csv')
+Policy_75 = pd.read_csv('/Users/vgopakum/Desktop/Github/Social_Distancing_ABM/Run_Data/Policy_75.csv')
+Policy_90 = pd.read_csv('/Users/vgopakum/Desktop/Github/Social_Distancing_ABM/Run_Data/Policy_90.csv')
+
+
+# %%
+Avg_Policy_0 = pd.DataFrame()
+
+sums_val_healthy = []
+sums_val_sick = []
+sums_val_immune = []
+
+#Calculating Mean and Variance
+for ii in range(100):
+    sums_healthy = []
+    sums_sick = []
+    sums_immune = []
+
+    for jj in range(20):
+        sums_healthy.append(Policy_0['Healthy'][ii+jj*100])
+        sums_sick.append(Policy_0['Sick'][ii+jj*100])
+        sums_immune.append(Policy_0['Immune'][ii+jj*100])
+
+    sums_val_healthy.append(int(sum(sums_healthy)/20))
+    sums_val_sick.append(int(sum(sums_sick)/20))
+    sums_val_immune.append(int(sum(sums_immune)/20))
+
+# %%
+    
+import seaborn as sns 
+sns.lineplot(x="Unnamed: 0", y="Sick",
+             hue="Exp_#",
+             data=Policy_0)
