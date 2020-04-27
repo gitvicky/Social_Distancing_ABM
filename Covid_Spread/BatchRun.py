@@ -234,8 +234,37 @@ for ii in range(100):
     sums_val_immune.append(int(sum(sums_immune)/20))
 
 # %%
-    
+
 import seaborn as sns 
-sns.lineplot(x="Unnamed: 0", y="Sick",
-             hue="Exp_#",
-             data=Policy_0)
+import matplotlib.pyplot as plt
+
+def Policy_Impact_plot(policy_data, title_string):
+    
+    plt.figure()
+    ax = sns.lineplot(x="Time", y="Total", 
+                      color=sns.xkcd_rgb["amber"],
+                      data=policy_data, label ='Total')
+    
+    sns.lineplot(x="Time", y="Healthy",
+                 color=sns.xkcd_rgb["medium green"],
+                 data=policy_data, label='Healthy')
+    
+    sns.lineplot(x="Time", y="Sick", 
+                 color=sns.xkcd_rgb["pale red"],
+                 data=policy_data, label ='Sick')
+    
+    sns.lineplot(x="Time", y="Immune",
+                 color=sns.xkcd_rgb["denim blue"],
+                 data=policy_data, label='Immune')
+    
+    ax.set(xlabel='Time', ylabel='# Individuals')
+    ax.set(title=title_string)
+
+
+# %%
+
+Policy_Impact_plot(Policy_0, "No Social Distancing")
+Policy_Impact_plot(Policy_25, "25% Social Distancing")
+Policy_Impact_plot(Policy_50, "50% Social Distancing")
+Policy_Impact_plot(Policy_75, "75% Social Distancing")
+Policy_Impact_plot(Policy_90, "90% Social Distancing")
