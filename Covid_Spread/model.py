@@ -3,7 +3,7 @@ from mesa.datacollection import DataCollector
 from mesa.space import MultiGrid
 from mesa.time import RandomActivation
 
-from .agent import Individual
+from agent import Individual
 
 class SocialDistancing_Model(Model):
     """
@@ -49,11 +49,7 @@ class SocialDistancing_Model(Model):
                             'Total': lambda m: m.schedule.get_agent_count(),
                             'Healthy': lambda m: self.count_type(m, 'Healthy'),
                             'Sick': lambda m: self.count_type(m, 'Sick'),
-                            'Immune': lambda m: self.count_type(m, 'Immune'),
-                            'Transmission Rate': self.Transmission,
-                            'Recovery Time': self.Recovery,
-                            'Mortality Rate': self.Mortality,
-                            'Social Distancing Policy': self.policy
+                            'Immune': lambda m: self.count_type(m, 'Immune')
                             }
 
         self.datacollector = DataCollector(model_reporters=model_reporters)
