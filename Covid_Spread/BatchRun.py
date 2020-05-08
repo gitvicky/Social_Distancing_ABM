@@ -212,26 +212,26 @@ Policy_90 = pd.read_csv('/Users/vgopakum/Desktop/Github/Social_Distancing_ABM/Ru
 
 
 # %%
-Avg_Policy_0 = pd.DataFrame()
+# Avg_Policy_0 = pd.DataFrame()
 
-sums_val_healthy = []
-sums_val_sick = []
-sums_val_immune = []
+# sums_val_healthy = []
+# sums_val_sick = []
+# sums_val_immune = []
 
-#Calculating Mean and Variance
-for ii in range(100):
-    sums_healthy = []
-    sums_sick = []
-    sums_immune = []
+# #Calculating Mean and Variance
+# for ii in range(100):
+#     sums_healthy = []
+#     sums_sick = []
+#     sums_immune = []
 
-    for jj in range(20):
-        sums_healthy.append(Policy_0['Healthy'][ii+jj*100])
-        sums_sick.append(Policy_0['Sick'][ii+jj*100])
-        sums_immune.append(Policy_0['Immune'][ii+jj*100])
+#     for jj in range(20):
+#         sums_healthy.append(Policy_0['Healthy'][ii+jj*100])
+#         sums_sick.append(Policy_0['Sick'][ii+jj*100])
+#         sums_immune.append(Policy_0['Immune'][ii+jj*100])
 
-    sums_val_healthy.append(int(sum(sums_healthy)/20))
-    sums_val_sick.append(int(sum(sums_sick)/20))
-    sums_val_immune.append(int(sum(sums_immune)/20))
+#     sums_val_healthy.append(int(sum(sums_healthy)/20))
+#     sums_val_sick.append(int(sum(sums_sick)/20))
+#     sums_val_immune.append(int(sum(sums_immune)/20))
 
 # %%
 
@@ -268,3 +268,5 @@ Policy_Impact_plot(Policy_25, "25% Social Distancing")
 Policy_Impact_plot(Policy_50, "50% Social Distancing")
 Policy_Impact_plot(Policy_75, "75% Social Distancing")
 #Policy_Impact_plot(Policy_90, "90% Social Distancing")
+
+# %%
