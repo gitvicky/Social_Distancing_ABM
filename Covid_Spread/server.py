@@ -5,7 +5,7 @@ from mesa.visualization.UserParam import UserSettableParameter
 from .model import SocialDistancing_Model
 
 COLORS = {  
-            "Total": "#A9A9A9",
+            "Total": "#feb308",
             "Healthy": "#00AA00",
             "Sick": "#880000",
             "Immune": "#0000ff"
