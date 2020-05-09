@@ -37,44 +37,31 @@ fixed_params = {
 }
 variable_params = None
 
+iters = 20
+steps = 100
 #
 # %%
-batch_run = BatchRunner(
+batch_run_0 = BatchRunner(
      SocialDistancing_Model,
      variable_params,
      fixed_params,
-     iterations=20,
-     max_steps=100,
+     iterations=iters,
+     max_steps=steps,
     model_reporters={"Data Collector": lambda m: m.datacollector})
 
+batch_run_0.run_all()
+run_data_0 = batch_run_0.get_model_vars_dataframe()
 
-# %%
-batch_run.run_all()
-# %%
-run_data_0 = batch_run.get_model_vars_dataframe()
+    # %%
 
-
-
-# %%
-
-fixed_params = {
-    "N": 10000,
-    "width": 100,
-    "height": 100,
-    'Initial_Outbreak': 0.1,
-    'TR': 0.5,
-    'RT': 28,
-    'MR': 0.02,
-    'Policy': 0.25
-}
-variable_params = None
+fixed_params['Policy'] = 0.25
 
 batch_run_25 = BatchRunner(
      SocialDistancing_Model,
      variable_params,
      fixed_params,
-     iterations=20,
-     max_steps=100,
+     iterations=iters,
+     max_steps=steps,
     model_reporters={"Data Collector": lambda m: m.datacollector})
 
 batch_run_25.run_all()
@@ -82,24 +69,14 @@ batch_run_25.run_all()
 run_data_25 = batch_run_25.get_model_vars_dataframe()
 
 
-fixed_params = {
-    "N": 10000,
-    "width": 100,
-    "height": 100,
-    'Initial_Outbreak': 0.1,
-    'TR': 0.5,
-    'RT': 28,
-    'MR': 0.02,
-    'Policy': 0.50
-}
-variable_params = None
+fixed_params['Policy'] = 0.50
 
 batch_run_50 = BatchRunner(
      SocialDistancing_Model,
      variable_params,
      fixed_params,
-     iterations=20,
-     max_steps=100,
+     iterations=iters,
+     max_steps=steps,
     model_reporters={"Data Collector": lambda m: m.datacollector})
 
 batch_run_50.run_all()
@@ -107,24 +84,14 @@ batch_run_50.run_all()
 run_data_50 = batch_run_50.get_model_vars_dataframe()
 
 
-fixed_params = {
-    "N": 10000,
-    "width": 100,
-    "height": 100,
-    'Initial_Outbreak': 0.1,
-    'TR': 0.5,
-    'RT': 28,
-    'MR': 0.02,
-    'Policy': 0.75
-}
-variable_params = None
+fixed_params['Policy'] = 0.75
 
 batch_run_75 = BatchRunner(
      SocialDistancing_Model,
      variable_params,
      fixed_params,
-     iterations=20,
-     max_steps=100,
+     iterations=iters,
+     max_steps=steps,
     model_reporters={"Data Collector": lambda m: m.datacollector})
 
 batch_run_75.run_all()
@@ -133,29 +100,19 @@ run_data_75 = batch_run_75.get_model_vars_dataframe()
 
 
 
-fixed_params = {
-    "N": 10000,
-    "width": 100,
-    "height": 100,
-    'Initial_Outbreak': 0.1,
-    'TR': 0.5,
-    'RT': 28,
-    'MR': 0.02,
-    'Policy': 0.90
-}
-variable_params = None
+# fixed_params['Policy'] = 0.90
 
-batch_run_90 = BatchRunner(
-     SocialDistancing_Model,
-     variable_params,
-     fixed_params,
-     iterations=20,
-     max_steps=100,
-    model_reporters={"Data Collector": lambda m: m.datacollector})
+# batch_run_90 = BatchRunner(
+#      SocialDistancing_Model,
+#      variable_params,
+#      fixed_params,
+#      iterations=iters,
+#      max_steps=steps,
+#     model_reporters={"Data Collector": lambda m: m.datacollector})
 
-batch_run_90.run_all()
+# batch_run_90.run_all()
 
-run_data_90 = batch_run_90.get_model_vars_dataframe()
+# run_data_90 = batch_run_90.get_model_vars_dataframe()
 
 
 
@@ -189,7 +146,7 @@ Policy_0 = create_df(run_data_0, 0.0)
 Policy_25 = create_df(run_data_25, 0.25)
 Policy_50 = create_df(run_data_50, 0.50)
 Policy_75 = create_df(run_data_75, 0.75)
-Policy_90 = create_df(run_data_90, 0.90)
+# Policy_90 = create_df(run_data_90, 0.90)
 
 # %%
 
@@ -197,7 +154,7 @@ Policy_0.to_csv('/Users/Vicky/Desktop/Code/Agent_Based_Modelling/Social_Distanci
 Policy_25.to_csv('/Users/Vicky/Desktop/Code/Agent_Based_Modelling/Social_Distancing/Social_Distancing_ABM/Run_Data/Policy_25.csv')
 Policy_50.to_csv('/Users/Vicky/Desktop/Code/Agent_Based_Modelling/Social_Distancing/Social_Distancing_ABM/Run_Data/Policy_50.csv')
 Policy_75.to_csv('/Users/Vicky/Desktop/Code/Agent_Based_Modelling/Social_Distancing/Social_Distancing_ABM/Run_Data/Policy_75.csv')
-Policy_90.to_csv('/Users/Vicky/Desktop/Code/Agent_Based_Modelling/Social_Distancing/Social_Distancing_ABM/Run_Data/Policy_90.csv')
+# Policy_90.to_csv('/Users/Vicky/Desktop/Code/Agent_Based_Modelling/Social_Distancing/Social_Distancing_ABM/Run_Data/Policy_90.csv')
 
 # %%
 
@@ -208,7 +165,7 @@ Policy_0 = pd.read_csv('/Users/vgopakum/Desktop/Github/Social_Distancing_ABM/Run
 Policy_25 = pd.read_csv('/Users/vgopakum/Desktop/Github/Social_Distancing_ABM/Run_Data/Policy_25.csv')
 Policy_50 = pd.read_csv('/Users/vgopakum/Desktop/Github/Social_Distancing_ABM/Run_Data/Policy_50.csv')
 Policy_75 = pd.read_csv('/Users/vgopakum/Desktop/Github/Social_Distancing_ABM/Run_Data/Policy_75.csv')
-Policy_90 = pd.read_csv('/Users/vgopakum/Desktop/Github/Social_Distancing_ABM/Run_Data/Policy_90.csv')
+# Policy_90 = pd.read_csv('/Users/vgopakum/Desktop/Github/Social_Distancing_ABM/Run_Data/Policy_90.csv')
 
 
 # %%
@@ -241,7 +198,7 @@ import matplotlib.pyplot as plt
 def Policy_Impact_plot(policy_data, title_string):
     
     plt.figure()
-    ax = sns.lineplot(x="Time", y="Sick", 
+    ax = sns.lineplot(x="Time", y="Total", 
                       color=sns.xkcd_rgb["amber"],
                       data=policy_data, label ='Total')
     

@@ -146,7 +146,7 @@ class Individual(Agent):
         self.infection_time = 0
 
 
-        multiplier = 3
+        multiplier = 2
         self.TR = self.model.Transmission #Transmission Rate 
         self.IP = 0 * multiplier #Incubation Period
         self.RT = self.model.Recovery * multiplier #Recovery Time 
