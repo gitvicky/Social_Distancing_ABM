@@ -6,9 +6,9 @@ from .model import SocialDistancing_Model
 
 COLORS = {  
             "Total": "#feb308",
-            "Healthy": "#00AA00",
-            "Sick": "#880000",
-            "Immune": "#0000ff"
+            "Healthy": "#39ad48",
+            "Sick": "#d9544d",
+            "Immune": "#3b5b92"
         }
 
 
@@ -33,9 +33,9 @@ model_params = {
     "width": 100,
     "Initial_Outbreak": UserSettableParameter("slider", "Initial Outbreak (%)", 0.1, 0.01, 1.0, 0.01),
     "TR": UserSettableParameter("slider", "Transmission Rate (%)", 0.5, 0.1, 1.0, 0.01),
-    "RT": UserSettableParameter("slider", "Recovery Time (days)", 22, 14, 28),
+    "RT": UserSettableParameter("slider", "Recovery Time (days)", 28, 14, 28),
     "MR": UserSettableParameter("slider", "Mortality Rate (%)", 0.02, 0.01, 0.05, 0.001),
-    "Policy": UserSettableParameter("slider", "Social Distancing (%)", 0.0, 0.0, 1.0, 0.05)
+    "Policy": UserSettableParameter("slider", "Social Distancing (%)", 0.5, 0.0, 1.0, 0.05)
 
 
 }

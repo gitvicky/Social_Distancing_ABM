@@ -135,7 +135,7 @@ class Individual(Agent):
     """
     def __init__(self,unique_id, model):
         """
-        Create a new agent
+        Create a new agent  
         Args:
             pos: The agent's coordinates on the grid.
             model: standard model reference for agent.
@@ -150,9 +150,12 @@ class Individual(Agent):
         self.TR = self.model.Transmission #Transmission Rate 
         self.IP = 0 * multiplier #Incubation Period
         self.RT = self.model.Recovery * multiplier #Recovery Time 
-        self.MR = self.model.Mortality
+        self.MR = self.model.Mortality / multiplier 
+
+        self.HC = 5000
 
         self.policy = self.model.policy # Percentage Immobile
+
 
     @property
     def hasSick(self):
@@ -202,8 +205,11 @@ class Individual(Agent):
             
         if self.condition == "Sick":
             self.recovery()
-            if np.random.uniform() < self.MR :
+            if np.random.uniform() < self.MR:
                 self.death()   
+            elif self.model.count_type(self.model, 'Sick') > self.HC and np.random.uniform() < 0.10:
+                self.death()
+
 
         if sick_occupants > 1 and self.condition == 'Healthy':
             if np.random.uniform() < self.TR :
