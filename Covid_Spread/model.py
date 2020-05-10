@@ -3,7 +3,7 @@ from mesa.datacollection import DataCollector
 from mesa.space import MultiGrid
 from mesa.time import RandomActivation
 
-from agent import Individual
+from .agent import Individual
 
 class SocialDistancing_Model(Model):
     """
