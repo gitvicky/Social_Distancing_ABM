@@ -160,11 +160,11 @@ Policy_75.to_csv('/Users/Vicky/Desktop/Code/Agent_Based_Modelling/Social_Distanc
 
 import numpy as np
 import pandas as pd 
-
-Policy_0 = pd.read_csv('/Users/vgopakum/Desktop/Github/Social_Distancing_ABM/Run_Data/Policy_0.csv')
-Policy_25 = pd.read_csv('/Users/vgopakum/Desktop/Github/Social_Distancing_ABM/Run_Data/Policy_25.csv')
-Policy_50 = pd.read_csv('/Users/vgopakum/Desktop/Github/Social_Distancing_ABM/Run_Data/Policy_50.csv')
-Policy_75 = pd.read_csv('/Users/vgopakum/Desktop/Github/Social_Distancing_ABM/Run_Data/Policy_75.csv')
+save_location = '/Users/vgopakum/Desktop/Github/Social_Distancing_ABM/Run_Data/Hospital_Capacity/'
+Policy_0 = pd.read_csv(save_location + 'Policy_0.csv')
+Policy_25 = pd.read_csv(save_location + 'Policy_25.csv')
+Policy_50 = pd.read_csv(save_location + 'Policy_50.csv')
+Policy_75 = pd.read_csv(save_location + 'Policy_75.csv')
 # Policy_90 = pd.read_csv('/Users/vgopakum/Desktop/Github/Social_Distancing_ABM/Run_Data/Policy_90.csv')
 
 
@@ -198,9 +198,16 @@ import matplotlib.pyplot as plt
 def Policy_Impact_plot(policy_data, title_string):
     
     plt.figure()
+
     ax = sns.lineplot(x="Time", y="Total", 
                       color=sns.xkcd_rgb["amber"],
                       data=policy_data, label ='Total')
+    
+    plt.plot(np.linspace(1,100),np.ones(50)*5000,
+                 color=sns.xkcd_rgb['black'],
+                 ls = ':', alpha = 0.5,
+                 label='Hospital Capacity')
+        
     
     sns.lineplot(x="Time", y="Healthy",
                  color=sns.xkcd_rgb["medium green"],
@@ -213,6 +220,8 @@ def Policy_Impact_plot(policy_data, title_string):
     sns.lineplot(x="Time", y="Immune",
                  color=sns.xkcd_rgb["denim blue"],
                  data=policy_data, label='Immune')
+    
+
     
     ax.set(xlabel='Time', ylabel='# Individuals')
     ax.set(title=title_string)
@@ -229,45 +238,62 @@ Policy_Impact_plot(Policy_75, "75% Social Distancing")
 # %%
 
 plt.figure()
+Policy_0['Total'] = 10000 - Policy_0['Total']
+Policy_25['Total'] = 10000 - Policy_25['Total']
+Policy_50['Total'] = 10000 - Policy_50['Total']
+Policy_75['Total'] = 10000 - Policy_75['Total']
+
+
 ax = sns.lineplot(x="Time", y="Total", 
-                    color=sns.xkcd_rgb["amber"],
-                    data=Policy_0, label ='0 %')
+                    color='#8B4000',
+                    data=Policy_0, label ='0%')
 
 sns.lineplot(x="Time", y="Total",
-                color=sns.xkcd_rgb["medium green"],
-                data=Policy_25, label='25 %')
+                color='#FF7417',
+                data=Policy_25, label='25%')
 
 sns.lineplot(x="Time", y="Total", 
-                color=sns.xkcd_rgb["pale red"],
-                data=Policy_50, label ='50 %')
+                color='#F9A602',
+                data=Policy_50, label ='50%')
 
 sns.lineplot(x="Time", y="Total",
-                color=sns.xkcd_rgb["denim blue"],
-                data=Policy_75, label='75 %')
+                color='#F8DE7E',
+                data=Policy_75, label='75%')
 
-ax.set(xlabel='Time', ylabel='# Individuals')
-ax.set(title="Impact of various social distancing polcies on the total population")
+ax.set(xlabel='Time', ylabel='# Deaths ndividuals')
+ax.set(title="Impact of various social distancing policies on the number of deaths")
+
+
+# %%
+
 
 # %%
 plt.figure()
+
+    
+plt.plot(np.linspace(1,100),np.ones(50)*5000,
+             color=sns.xkcd_rgb['black'],
+             ls = ':', alpha = 0.5,
+             label='Hospital Capacity')
+
 ax = sns.lineplot(x="Time", y="Sick", 
-                    color=sns.xkcd_rgb["amber"],
-                    data=Policy_0, label ='0 %')
+                color='#420D09',
+                data=Policy_0, label ='0%')
 
 sns.lineplot(x="Time", y="Sick",
-                color=sns.xkcd_rgb["medium green"],
-                data=Policy_25, label='25 %')
+                color='#933A16',
+                data=Policy_25, label='25%')
 
 sns.lineplot(x="Time", y="Sick", 
-                color=sns.xkcd_rgb["pale red"],
-                data=Policy_50, label ='50 %')
+                color='#D21F3C',
+                data=Policy_50, label ='50%')
 
 sns.lineplot(x="Time", y="Sick",
-                color=sns.xkcd_rgb["denim blue"],
-                data=Policy_75, label='75 %')
+                color='#FA8072',
+                data=Policy_75, label='75%')
 
 ax.set(xlabel='Time', ylabel='# Individuals')
-ax.set(title="Impact of various social distancing polcies on the spread of the virus.")
+ax.set(title="Impact of various social distancing policies on the spread of the virus.")
 
 
 # %%
